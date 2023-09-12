@@ -54,12 +54,18 @@
   background-color: #fff;
   width: 100%;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .C_main_car > img {
   max-width: 100%;
   object-fit: cover;
   border-radius: 4px 4px 0 0;
+  transition: transform 300ms ease;
+}
+
+.C_main_car > img:hover {
+  transform: scale(1.05);
 }
 
 .C_main_car_details {
