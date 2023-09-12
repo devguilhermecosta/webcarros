@@ -1,12 +1,19 @@
+.container {
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #80808054;
+  filter: drop-shadow(0 0 1px #808080);
+}
+
 .C_header {
   width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #80808054;
-  filter: drop-shadow(0 0 1px #808080);
-  background-color: #fff;
 }
 
 .C_header_logo img {
