@@ -1,0 +1,17 @@
+.C_header {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #bdbaba;
+}
+
+.C_header_logo img {
+  width: 100%;
+  max-width: 320px;
+}
+
+.C_header_logo {
+  font-weight: 300;
+}

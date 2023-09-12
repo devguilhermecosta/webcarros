@@ -1,12 +1,19 @@
 import logo from '../../assets/logo.svg';
+import Style from './header.module.css';
+import { LiaUserCircle } from 'react-icons/lia';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
-    <header>
-      <div>
-        <img src={logo} alt="logo da loja" />
+    <header className={Style.C_header}>
+      <div className={Style.C_header_logo}>
+        <Link to="/">
+          <img src={logo} alt="logo da loja" />
+        </Link>
       </div>
-      <h1>This is the Header</h1>
+      <Link to="/dashboard">
+        <LiaUserCircle size={45} className={Style.C_header_logo} />
+      </Link>
     </header>
   )
 }
