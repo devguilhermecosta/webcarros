@@ -4,12 +4,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #bdbaba;
+  border-bottom: 1px solid #80808054;
+  filter: drop-shadow(0 0 1px #808080);
+  background-color: #fff;
 }
 
 .C_header_logo img {
   width: 100%;
   max-width: 320px;
+}
+
+.C_header_logo_container {
+  font-size: 35px;
+  color: #808080;
+  border: 1px solid #808080;
+  border-radius: 25px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .C_header_logo {
