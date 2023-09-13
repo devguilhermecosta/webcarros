@@ -1,0 +1,17 @@
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 300ms ease-in;
+  margin: 5px 0;
+}
+
+.input:focus {
+  border-color: gray;
+}
+
+.error_message {
+  font-size: 14px;
+  color: #ff0000;
+}

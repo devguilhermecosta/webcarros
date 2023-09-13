@@ -1,0 +1,47 @@
+.C_login {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 578px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 25px;
+}
+
+.C_logo {
+  width: 100%;
+  max-width: 280px;
+}
+
+.logo {
+  width: 100%;
+}
+
+.Login_form {
+  width: 100%;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.button_submit {
+  width: 100%;
+  padding: 10px 5px;
+  margin: 4px 0;
+  background-color: #424141;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.link_register {
+  color: #000000;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 300;
+}
