@@ -1,29 +1,32 @@
 import Style from './register.module.css';
 import Container from '../../components/container';
 import logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Input from '../../components/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { auth } from "../../services/FirabaseConnection";
+import { createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
 
-
-// cria um esquema de validação de campo.
-// cada campo deve ser validado individualmente.
-// o nome do campo deve ser o mesmo do nome do input
-const schema = z.object({
-  name: z.string().nonempty("Este campo é obrigatório"),
-  email: z.string().email("Insira um email válido").nonempty("Este campo é obrigatório"),
-  password: z.string()
-  .min(6, "A senha deve ter pelo menos 6 catacteres")
-  .nonempty("Este campo é obrigatório")
-})
-
-// cria um novo tipo primitivo.
-// estamos dizendo que o tipo 'infer' recebe dados do tipo 'schema'
-type FormData = z.infer<typeof schema>;
 
 export default function Register() {
+  // cria um esquema de validação de campo.
+  // cada campo deve ser validado individualmente.
+  // o nome do campo deve ser o mesmo do nome do input
+  const schema = z.object({
+    name: z.string().nonempty("Este campo é obrigatório"),
+    email: z.string().email("Insira um email válido").nonempty("Este campo é obrigatório"),
+    password: z.string()
+    .min(6, "A senha deve ter pelo menos 6 catacteres")
+    .nonempty("Este campo é obrigatório")
+  })
+
+  // cria um novo tipo primitivo.
+  // estamos dizendo que o tipo 'infer' recebe dados do tipo 'schema'
+  type FormData = z.infer<typeof schema>;
+
   /*
     - register é um método que registra individualmente cada input do form com seus
     respectivos validadore e regras;
@@ -39,10 +42,33 @@ export default function Register() {
     mode: "onChange"
   })
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function handleLogout() {
+      await signOut(auth);
+    }
+
+    handleLogout();
+
+  }, [])
+
   
-  // função que será chamada quando o form sofrer submit
-  function onSubmit(data: FormData) {
-    console.log(data);
+  // função que será chamada quando o form sofrer submit.
+  // para criar o usuário no firebase, a authenticação com e-mail e senha
+  // deve estar ativada.
+  async function onSubmit(data: FormData) {
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+    .then(async (user) => {
+      await updateProfile(user.user, {
+        displayName: data.name
+      })
+      navigate("/dashboard", { replace: true }); 
+    })
+    .catch((err) => {
+      console.log('Erro ao criar usuário');
+      console.log(err);
+    })
   }
 
 

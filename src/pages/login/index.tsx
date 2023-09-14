@@ -1,28 +1,50 @@
 import Style from './login.module.css';
 import Container from '../../components/container';
 import logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../../services/FirabaseConnection';
+import { useEffect } from 'react';
 
-const schema = z.object({
-  email: z.string().email("Insira um email válido").nonempty("Este campo é obrigatório"),
-  password: z.string().nonempty("Este campo é obrigatório")
-})
-
-type FormData = z.infer<typeof schema>;
 
 export default function Login() {
+  const schema = z.object({
+    email: z.string().email("Insira um email válido").nonempty("Este campo é obrigatório"),
+    password: z.string().nonempty("Este campo é obrigatório")
+  })
+  
+  type FormData = z.infer<typeof schema>;
+
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: "onChange"
   })
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function handleLogout() {
+      await signOut(auth);
+    }
+
+    handleLogout();
+
+  }, [])
+
   
   function onSubmit(data: FormData) {
-    console.log(data);
+    signInWithEmailAndPassword(auth, data.email, data.password)
+    .then(() => {
+      console.log('Login realizado com sucesso');
+      navigate("/dashboard", { replace: true });
+    })
+    .catch((err) => {
+      console.log(`Erro ao fazer login: ${err}`);
+    })
   }
 
 
