@@ -33,6 +33,74 @@
   cursor: pointer;
 }
 
+.C_form {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+.C_form_form {
+  width: 100%;
+}
+
+.C_form_form label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.C_form_input_container:not(:first-of-type) {
+  width: 100%;
+  margin-top: 3px;
+}
+
+.C_form_flex_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.C_form_textarea {
+  width: 100%;
+  height: 80px;
+  border: 1px solid #c1c1c1;
+  border-radius: 4px;
+  padding: 4px;
+  resize: none;
+}
+
+.C_form_textarea:focus {
+  outline: none;
+}
+
+.C_form_error_message {
+  font-size: 14px;
+  color: #E11138;
+}
+
+.C_form_button {
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #c1c1c1;
+  border-radius: 4px;
+  outline: none;
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media screen and (max-width: 420px) {
+  .C_form_flex_container {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 648px) {
   .C_image_gallery {
     justify-content: center;
