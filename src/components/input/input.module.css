@@ -2,13 +2,14 @@
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
+  border-radius: 4px;
   outline: none;
   transition: border 300ms ease-in;
   margin: 5px 0;
 }
 
 .input:focus {
-  border-color: gray;
+  outline: none;
 }
 
 .error_message {
