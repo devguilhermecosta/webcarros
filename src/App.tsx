@@ -6,6 +6,7 @@ import New from './pages/dashboard/new';
 import Home from './pages/home';
 import Login from './pages/login';
 import Register from './pages/register';
+import Private from './components/private';
 
 
 const router = createBrowserRouter([
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />
+        element: <Private><Dashboard /></Private>
       },
       {
         path: "/car/:id",
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/new",
-        element: <New />
+        element: <Private><New /></Private>
       }
     ]
   },

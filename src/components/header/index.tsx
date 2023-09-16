@@ -2,10 +2,11 @@ import logo from '../../assets/logo.svg';
 import Style from './header.module.css';
 import { FiUser, FiLogIn } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/authcontext';
+import { useContext } from 'react';
 
 export default function Header() {
-  const isLoading = false;
-  const signIn = false;
+  const { signed, loadingAuth } = useContext(AuthContext);
 
   return (
     <div className={Style.container}>
@@ -16,7 +17,7 @@ export default function Header() {
           </Link>
         </div>
 
-        {!isLoading && signIn && (
+        {!loadingAuth && signed && (
           <Link to="/dashboard">
             <div className={Style.C_header_logo_container}>
               <FiUser className={Style.C_header_logo} />
@@ -24,7 +25,7 @@ export default function Header() {
           </Link>
         )}
 
-        {!isLoading && !signIn && (
+        {!loadingAuth && !signed && (
           <Link to="/login">
             <div className={Style.C_header_logo_container}>
               <FiLogIn className={Style.C_header_logo} />
