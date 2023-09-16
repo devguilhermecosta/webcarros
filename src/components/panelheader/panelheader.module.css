@@ -1,0 +1,26 @@
+.C_panelheader {
+  width: 100%;
+  background-color: #E11138;
+  padding: 10px 5px;
+  border-radius: 4px;
+  display: flex;
+}
+
+.C_panelheader > a,
+.C_panelheader > button {
+  color: #fff;
+  font-size: 14px;
+}
+
+.C_panelheader > a {
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.C_panelheader > button {
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

@@ -1,7 +1,11 @@
+import Container from "../../../components/container";
+import PanelHeader from "../../../components/panelheader";
+
 export default function New() {
   return (
-    <div>
-      <h1>New Car Page</h1>
-    </div>
+    <Container>
+      <PanelHeader />
+      <h1>Novo Carro</h1>
+    </Container>
   )
 }
