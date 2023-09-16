@@ -6,6 +6,8 @@ import { auth } from "../services/FirabaseConnection";
 type AuthContextData = {
   signed: boolean;
   loadingAuth: boolean;
+  handleInfoUser: ({ uid, name, email }: UserProps) => void;
+  user: UserProps | null;
 }
 
 
@@ -13,7 +15,7 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-interface userProps {
+interface UserProps {
   uid: string;
   name: string | null;
   email: string | null;
@@ -23,7 +25,7 @@ interface userProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<userProps | null>(null);
+  const [user, setUser] = useState<UserProps | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
 
   useEffect(() => {
@@ -49,11 +51,22 @@ function AuthProvider({ children }: AuthProviderProps) {
     })
   }, [])
 
+  
+  function handleInfoUser({ uid, name, email }: UserProps) {
+    setUser({
+      uid,
+      name,
+      email
+    });
+  }
+
   return (
     <AuthContext.Provider
     value={{
       signed: !!user,
-      loadingAuth
+      loadingAuth,
+      handleInfoUser,
+      user
     }}
     >
       {children}

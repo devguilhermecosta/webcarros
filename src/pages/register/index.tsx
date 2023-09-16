@@ -2,13 +2,14 @@ import Style from './register.module.css';
 import Container from '../../components/container';
 import logo from '../../assets/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import Input from '../../components/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { auth } from "../../services/FirabaseConnection";
 import { createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+import { AuthContext } from '../../contexts/authcontext';
 
 
 export default function Register() {
@@ -22,6 +23,7 @@ export default function Register() {
     .min(6, "A senha deve ter pelo menos 6 catacteres")
     .nonempty("Este campo é obrigatório")
   })
+  const { handleInfoUser } = useContext(AuthContext);
 
   // cria um novo tipo primitivo.
   // estamos dizendo que o tipo 'infer' recebe dados do tipo 'schema'
@@ -62,6 +64,11 @@ export default function Register() {
     .then(async (user) => {
       await updateProfile(user.user, {
         displayName: data.name
+      })
+      handleInfoUser({
+        uid: user.user.uid,
+        name: data.name,
+        email: data.email
       })
       navigate("/dashboard", { replace: true }); 
     })
