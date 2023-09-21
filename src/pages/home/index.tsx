@@ -29,6 +29,7 @@ interface ImageProps {
 
 export default function Home() {
   const [cars, setCars] = useState<CarProps[]>([]);
+  const [imagesId, setImagesId] = useState<string[]>([]);
 
   
   useEffect(() => {
@@ -66,6 +67,12 @@ export default function Home() {
 
   }, [])
 
+
+  function handleImage(id: string) {
+    setImagesId((imagesId) => [...imagesId, id]);
+  }
+
+
   return (
     <Container>
       <section className={Style.C_search}>
@@ -83,7 +90,16 @@ export default function Home() {
         {cars.map( (car) => (
           <Link key={car.id}  to={`/car/${car.id}`}>
             <section className={Style.C_main_car}>
-              <img src={car.images[0].url} alt="car image" />
+              <div
+                className={Style.C_main_car_img}
+                style={{ display: imagesId.includes(car.id) ? "none" : "block" }}
+              >
+              </div>
+              <img
+                src={car.images[0].url} alt="car image"
+                onLoad={() => handleImage(car.id)}
+                style={{ display: imagesId.includes(car.id) ? "block" : "none" }}
+              />
               <div className={Style.C_main_car_details}>
                 <div className={Style.C_main_car_description}>
                   <p className={Style.C_main_car_details_name}>{car.name}</p>
@@ -99,7 +115,6 @@ export default function Home() {
           </Link>
 
         ) )}
-  
       </main>
     </Container>
   )
