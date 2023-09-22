@@ -1,0 +1,82 @@
+.Swiper_img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+}
+
+.C_car {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.C_car_name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.C_car_name p {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.C_car_model {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin: 15px 0;
+}
+
+.C_car_details {
+  display: flex;
+  column-gap: 30px;
+  margin-bottom: 15px;
+}
+
+.C_car_details > div > p,
+.C_car_description,
+.C_car_whatsapp,
+.C_car_whatsapp_button {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.C_car_details > div > p:first-child,
+.C_car_description > p:first-child,
+.C_car_whatsapp > p:first-child {
+  font-weight: 600;
+}
+
+.C_car_description {
+  margin-bottom: 15px;
+}
+
+.C_car_description > p:last-child {
+  text-align: justify;
+}
+
+.C_car_whatsapp_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  background-color: rgb(34, 184, 34);
+  height: 30px;
+  margin: 15px 0;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media screen and (max-width: 478px) {
+  .C_car_name {
+    flex-direction: column;
+  }
+}

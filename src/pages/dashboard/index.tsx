@@ -14,6 +14,7 @@ import {
 } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
 import { db, storage } from '../../services/FirabaseConnection';
+import toast from 'react-hot-toast/headless';
 
 
 interface CarProps {
@@ -79,6 +80,7 @@ export function Dashboard() {
       const carRef = doc(db, "cars", carDelete.id);
       await deleteDoc(carRef);
       setCars(cars?.filter(car => car.id !== carDelete.id));
+      toast.success('veículo deletado com sucesso');
 
       carDelete.images.map( async image => {
         const imagePath = `images/${image.uid}/${image.name}`;

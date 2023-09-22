@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { auth } from "../../services/FirabaseConnection";
 import { createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
 import { AuthContext } from '../../contexts/authcontext';
+import toast from 'react-hot-toast';
 
 
 export default function Register() {
@@ -70,11 +71,11 @@ export default function Register() {
         name: data.name,
         email: data.email
       })
+      toast('usuário registrado com sucesso.')
       navigate("/dashboard", { replace: true }); 
     })
     .catch((err) => {
-      console.log('Erro ao criar usuário');
-      console.log(err);
+      toast.error(`Erro ao criar usuário: ${err}`)
     })
   }
 

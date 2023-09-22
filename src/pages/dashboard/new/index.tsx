@@ -17,6 +17,7 @@ import {
 import { addDoc, collection } from 'firebase/firestore';
 import { AuthContext } from '../../../contexts/authcontext';
 import { v4 as uuidV4 } from 'uuid';
+import toast from 'react-hot-toast';
 
 
 type FormData = z.infer<typeof schema>;
@@ -53,7 +54,7 @@ export default function New() {
 
   function onSubmit(data: FormData) {
     if (carImages.length === 0) {
-      alert("Envie ao menos uma imagem!");
+      toast.error('Envie ao menos uma imagem!');
       return;
     }
 
@@ -66,7 +67,7 @@ export default function New() {
     })
 
     addDoc(collection(db, "cars"), {
-      owner: user?.name,
+      owner: user?.name?.toUpperCase(),
       uid: user?.uid,
       images: carImageList,
       created_at: new Date(),
@@ -82,10 +83,10 @@ export default function New() {
     .then( () => {
       reset();
       setCarImages([]);
-      console.log('cadastrado com sucesso');
+      toast.success('cadastrado com sucesso');
     })
     .catch( (error) => {
-      console.log(`Erro ao enviar a imagem: ${error}`);
+      toast.error(`Erro ao enviar a imagem: ${error}`);
     })
   }
 
@@ -96,7 +97,7 @@ export default function New() {
       if (image.type === 'image/jpeg' || image.type === 'image/png') {
         await handleUpload(image);
       } else {
-        alert('envie somente imagens JPEG ou PNG...');
+        toast.error('envie somente imagens JPEG ou PNG...');
       }
       
     }
@@ -132,7 +133,7 @@ export default function New() {
       await deleteObject(imageRef);
       setCarImages(carImages.filter((carImage) => carImage.url !== image.url ));
     } catch(e) {
-      console.log(e);
+      toast.error(`erro ao deletar: ${e}`);
     }
   }
 
